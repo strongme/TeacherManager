@@ -1,7 +1,6 @@
 package org.strongme.tecmgr.controller;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,7 @@ public class SignController {
 	@Resource
 	private TeacherRecordService teacherRecordService;
 	
-	@RequestMapping(value="/isExist",method=RequestMethod.POST,produces = "application/json")
+	@RequestMapping(value="/sign/isExist",method=RequestMethod.POST,produces = "application/json")
 	public @ResponseBody Boolean isExist(@RequestParam String teacherid) {
 		Boolean result = teacherRecordService.isExist(teacherid); 
 		return result;
@@ -29,7 +28,7 @@ public class SignController {
 	public String signup(@RequestParam String teacherid,@RequestParam String password,@RequestParam String teachername,@RequestParam String departmentname,HttpServletRequest request) {
 		TeacherRecordBean bean = new TeacherRecordBean( teacherid, departmentname, teachername, password);
 		if(teacherRecordService.isExist(teacherid)) {
-			request.setAttribute("teacher", bean);
+			request.getSession().setAttribute("teacher", bean);
 			return "index/index";
 		}
 		int result = teacherRecordService.save(bean);
@@ -40,7 +39,7 @@ public class SignController {
 				request.getSession().setAttribute("ISMASTER", true);
 				return "redirect:/sign/master";
 			}
-			request.setAttribute("teacher", bean);
+			request.getSession().setAttribute("teacher", bean);
 			request.getSession().setAttribute("ISMASTER", false);
 			return "index/index";
 		}
@@ -77,6 +76,16 @@ public class SignController {
 			return "/";
 		}
 	}
+	@RequestMapping(value="/sign/logout",method=RequestMethod.GET)
+	public String logout(HttpServletRequest request) {
+		TeacherRecordBean bean = (TeacherRecordBean) request.getSession().getAttribute("teacher");
+		if(bean!=null) {
+			request.getSession().removeAttribute("teacher");
+		}
+		return "redirect:/";
+	}
+	
+	
 	
 	@RequestMapping(value="/getRecord",method=RequestMethod.POST,produces = "application/json")
 	public @ResponseBody TeacherRecordBean getRecord(@RequestParam String teacherId) {

@@ -32,7 +32,7 @@ function checkform() {
 function isExist(teacherid) {
 	if(!teacherid)return;
 	$.post(
-			basepath+'/isExist',
+			basepath+'/sign/isExist',
 			{teacherid:teacherid},
 			function(data,status) {
 				if(data) {
@@ -45,7 +45,7 @@ function isExist(teacherid) {
 
 function initSelDepartment() {
 	$.post(
-			basepath+'/department/all',
+			basepath+'/department/sign/all',
 			{},
 			function(data,status) {
 				if(data) {

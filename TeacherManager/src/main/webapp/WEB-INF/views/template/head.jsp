@@ -62,7 +62,7 @@
                     <ul class="nav pull-right">
                         <li  style="display: <%=request.getAttribute("toggle")%>"><a id="eye" href="<%=request.getContextPath()%>/to/${teacher.teacherId}">欢迎：<strong>${teacher.teacherName}</strong>&nbsp;老师</a></li>
                     <li><a target="_blank" href="<%=request.getContextPath()%>/master/queryPreview/${teacher.teacherId}" style="display: <%=request.getAttribute("toggle")%>">总体预览</a></li>
-                    <li><a href="<%=request.getContextPath()%>" style="display: <%=request.getAttribute("toggle")%>">注销登录</a></li>
+                    <li><a href="<%=request.getContextPath()%>/sign/logout" style="display: <%=request.getAttribute("toggle")%>">注销登录</a></li>
                     </ul>
                   </div><!-- /.nav-collapse -->
                 </div>

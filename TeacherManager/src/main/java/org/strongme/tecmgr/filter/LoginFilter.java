@@ -24,11 +24,18 @@ public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		TeacherRecordBean teacher  = (TeacherRecordBean) req.getSession().getAttribute("teacher");
-		if(teacher!=null) {
+		String url = req.getRequestURI();
+		String contextPath1 = req.getContextPath();
+		String contextPath2 = contextPath1+"/";
+		if(contextPath1.equals(url)||contextPath2.equals(url)||url.contains("sign")||url.contains("/resources/")) {
 			chain.doFilter(request, response);
 		}else {
-			res.sendRedirect(req.getContextPath());
+			TeacherRecordBean teacher  = (TeacherRecordBean) req.getSession().getAttribute("teacher");
+			if(teacher!=null) {
+				chain.doFilter(request, response);
+			}else {
+				res.sendRedirect(req.getContextPath());
+			}
 		}
 	}
 

@@ -14,9 +14,9 @@
  </style>
 </head>
 <body>
-<div style="text-align: center;">
+<%-- <div style="text-align: center;">
 <h6><font>如有问题请先查看<a target="_blank" href="<%=request.getContextPath()%>/sign/help" style="color:red;text-decoration: underline;">使用说明</a></font></h6>
-</div>
+</div> --%>
 	<div style="position: absolute;top: 35%;left: 15%;">
 		 	<h1><font face="楷体" size="200">太原成成中学</font></h1>
 			<h3 style="text-align: center;"><font face="楷体">教师成长记录系统</font></h3>	
@@ -50,9 +50,9 @@
 		  
 	</form>
 </div>
-<div style="text-align: center;">
+<!-- <div style="text-align: center;">
 <h6><font>如果还有问题无法解决请及时联系信息中心 ！申建强老师   TEL：15536660688 袁子茜  QQ：2022593664 TEL：15619388806</font></h6>
- </div>
+ </div> -->
  <script src="<%=request.getContextPath() %>/resources/scripts/jquery-1.8.3.js"></script>
   <script type="text/javascript">var basepath="<%=request.getContextPath()%>";</script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/scripts/bootstrap.js"></script>

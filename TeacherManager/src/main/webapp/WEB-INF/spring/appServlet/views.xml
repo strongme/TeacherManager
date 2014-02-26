@@ -4,10 +4,10 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<definition name=".signin" template="/WEB-INF/views/signin.jsp">
-		<put-attribute name="title" value="登录页面"></put-attribute>
 	</definition>
 	<definition name=".signup" template="/WEB-INF/views/signup.jsp">
-		<put-attribute name="title" value="注册页面"></put-attribute>
+	</definition>
+	<definition name=".preview" template="/WEB-INF/views/preview/preview.jsp">
 	</definition>
 	
 	<definition name="template" template="/WEB-INF/views/template/main.jsp">

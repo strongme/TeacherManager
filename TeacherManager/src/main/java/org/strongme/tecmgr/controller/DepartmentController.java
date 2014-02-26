@@ -18,7 +18,7 @@ public class DepartmentController {
 	@Resource
 	private DepartmentService departmentService;
 	
-	@RequestMapping(value="/all",method=RequestMethod.POST,produces = "application/json")
+	@RequestMapping(value="/sign/all",method=RequestMethod.POST,produces = "application/json")
 	public @ResponseBody List<Department> all() {
 		return departmentService.allDepartment();
 	}

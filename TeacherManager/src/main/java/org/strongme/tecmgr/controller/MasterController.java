@@ -107,7 +107,7 @@ public class MasterController {
 		model.addAttribute("workTeachSkill", workTeachSkillService.get(teacherid));
 		model.addAttribute("workCommSupport", workCommSupportService.get(teacherid));
 		model.addAttribute("workProMoral", workProMoralService.get(teacherid));
-		return "preview";
+		return ".preview";
 	}
 	
 }
