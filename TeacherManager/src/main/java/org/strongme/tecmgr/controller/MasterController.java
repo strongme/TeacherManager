@@ -1,8 +1,7 @@
 package org.strongme.tecmgr.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.strongme.tecmgr.bean.TeacherRecordBean;
 import org.strongme.tecmgr.service.HonourService;
 import org.strongme.tecmgr.service.OverAllPlanService;
 import org.strongme.tecmgr.service.SectionLittleSummaryService;
@@ -73,17 +70,18 @@ public class MasterController {
 	@Resource
 	private WorkProMoralService workProMoralService;
 	
-	@RequestMapping(value="/query",method=RequestMethod.POST,produces = "application/json")
-	public @ResponseBody List<TeacherRecordBean> query(
+	@RequestMapping(value="/query",method=RequestMethod.POST)
+	public String query(
 			@RequestParam String zzmm,
 			@RequestParam String subject,
 			@RequestParam String degree,
 			@RequestParam String title,
 			@RequestParam String department,
 			@RequestParam String name,
-			@RequestParam String teacherid
+			@RequestParam String teacherid,HttpServletRequest request
 			) {
-		return teacherRecordService.doquery(zzmm, subject, degree, title, department,name,teacherid);
+			request.setAttribute("data", teacherRecordService.doquery(zzmm, subject, degree, title, department,name,teacherid));
+		return "master/master";
 	}
 
 	@RequestMapping(value="/queryPreview/{teacherid}",method=RequestMethod.GET)

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,13 +22,14 @@
                     		<li class="divider-vertical"></li>
                     		<li class="divider-vertical"></li>
                     		<li class="divider-vertical"></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
+                    		<c:if test="${ISMASTER==null||ISMASTER==false}">
+                    			<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">基本情况 <b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><a href="<%=request.getContextPath()%>/basicInfo/form/${teacher.teacherId}">基本信息</a></li>
 									<li><a href="<%=request.getContextPath()%>/workExp/get/${teacher.teacherId}">个人简历</a></li>
-								</ul></li>
-
+								</ul>
+							</li>
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown">总体成长规划 <b class="caret"></b></a>
 								<ul class="dropdown-menu">
@@ -57,12 +59,17 @@
 									<li><a href="<%=request.getContextPath()%>/workTeachSkill/get/${teacher.teacherId}">教育技术培训</a></li>
 									<li><a href="<%=request.getContextPath()%>/workCommSupport/get/${teacher.teacherId}">交流支教</a></li>
 									<li><a href="<%=request.getContextPath()%>/workProMoral/get/${teacher.teacherId}">教师职业道德</a></li>
-								</ul></li>
-						</ul>
+								</ul>
+								</li>
+                    			
+                    		</c:if>
+					</ul>
                     <ul class="nav pull-right">
-                        <li  style="display: <%=request.getAttribute("toggle")%>"><a id="eye" href="<%=request.getContextPath()%>/to/${teacher.teacherId}">欢迎：<strong>${teacher.teacherName}</strong>&nbsp;老师</a></li>
-                    <li><a target="_blank" href="<%=request.getContextPath()%>/master/queryPreview/${teacher.teacherId}" style="display: <%=request.getAttribute("toggle")%>">总体预览</a></li>
-                    <li><a href="<%=request.getContextPath()%>/sign/logout" style="display: <%=request.getAttribute("toggle")%>">注销登录</a></li>
+                        <li><a id="eye" href="<%=request.getContextPath()%>/to/${teacher.teacherId}">欢迎：<strong>${teacher.teacherName}</strong>&nbsp;<c:if test="${ISMASTER==null||ISMASTER==false}">老师</c:if></a></li>
+                    	<c:if test="${ISMASTER==null||ISMASTER==false}">
+                    	<li><a target="_blank" href="<%=request.getContextPath()%>/master/queryPreview/${teacher.teacherId}">总体预览</a></li>
+                    	</c:if>
+                    <li><a href="<%=request.getContextPath()%>/sign/logout">注销登录</a></li>
                     </ul>
                   </div><!-- /.nav-collapse -->
                 </div>

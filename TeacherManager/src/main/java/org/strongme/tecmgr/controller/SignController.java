@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.strongme.tecmgr.bean.TeacherBasicInfoBean;
 import org.strongme.tecmgr.bean.TeacherRecordBean;
 import org.strongme.tecmgr.service.TeacherRecordService;
 
@@ -36,8 +37,9 @@ public class SignController {
 			return "redirect:/sign/signup";
 		}else {
 			if("admin".equals(teacherid)&&"admin".equals(password)) {
+				request.getSession().setAttribute("teacher", bean);
 				request.getSession().setAttribute("ISMASTER", true);
-				return "redirect:/sign/master";
+				return "master/master";
 			}
 			request.getSession().setAttribute("teacher", bean);
 			request.getSession().setAttribute("ISMASTER", false);
@@ -57,8 +59,8 @@ public class SignController {
 		}else {
 			if("admin".equals(teacherid)&&"admin".equals(bean.getPassword())) {
 				request.getSession().setAttribute("ISMASTER", true);
-				request.setAttribute("toggle", "none");
-				return "redirect:/sign/master";
+				request.getSession().setAttribute("teacher", bean);
+				return "master/master";
 			}
 			request.getSession().setAttribute("teacher", bean);
 			request.getSession().setAttribute("ISMASTER", false);
@@ -81,6 +83,7 @@ public class SignController {
 		TeacherRecordBean bean = (TeacherRecordBean) request.getSession().getAttribute("teacher");
 		if(bean!=null) {
 			request.getSession().removeAttribute("teacher");
+			request.getSession().removeAttribute("ISMASTER");
 		}
 		return "redirect:/";
 	}
